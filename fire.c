@@ -317,7 +317,7 @@ int main(int argc, char *argv[])
 				green	= colour_buffer[(i * SCREEN_WIDTH) + j][1];
 				blue	= colour_buffer[(i * SCREEN_WIDTH) + j][2];
 				alpha	= (char)0xFF;
-			//	alpha	= colour_buffer[(i * SCREEN_WIDTH) + j][3];
+			/*	alpha	= colour_buffer[(i * SCREEN_WIDTH) + j][3]; */
 				
 				SDL_SetRenderDrawColor(g_renderer, red, green, blue, alpha);
 				SDL_RenderDrawPoint(g_renderer, j, i);

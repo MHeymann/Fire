@@ -1,21 +1,28 @@
 # OBJS specifies which files on which compilation depends
-OBJS = fire.c
+OBJDIR = objs
+OBJS = $(OBJDIR)/fire.o
+EXES = fire
 
 # Compiler flags
-COMPILER_FLAGS 	= -Wall -pedantic
+CFLAGS 	= -Wall -pedantic
 DFLAGS			= -DDEBUGFLAG
-LINKER_FLAGS 	= -lSDL2 #-lSDL2_image
+LDFLAGS 	= -lSDL2 #-lSDL2_image
 
 # Commands
 CC = gcc
 RM = rm -f
+COMPILE = $(CC) $(CFLAGS) $(DFLAGS)
 
-# OBJ_NAME specifies the name of our executable
-OBJ_NAME = fire
 
 # This is the target that compiles our executable
-all: $(OBJS)
-	$(CC) $(OBJS) $(COMPILER_FLAGS) $(DFLAGS) $(LINKER_FLAGS) -o $(OBJ_NAME)
+all: $(EXES)
 
+fire: $(OBJS)
+	$(COMPILE) $^ $(LDFLAGS) -o $@ 
+
+$(OBJDIR)/%.o: src/%.c 
+	$(COMPILE) -c -o $@ $<
+
+.PHONY: clean
 clean:
-	$(RM) *.o $(OBJ_NAME)
+	$(RM) $(OBJDIR)/*.o $(EXES)
